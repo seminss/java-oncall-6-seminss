@@ -7,6 +7,7 @@ import oncall.service.OncallService;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
+import java.util.NoSuchElementException;
 import java.util.function.Supplier;
 
 public class OncallController {
@@ -21,15 +22,20 @@ public class OncallController {
     }
 
     public void start() {
-        runMethod(() -> {
-            MonthRequest workingRequest = getValidRequest(inputView::readWorkingMonth);
-            oncallService.makeDetailOfMonth(workingRequest);
-            WorkerRequest weekDayWorkingPeople = inputView.readWeekDayPeople();
-            WorkerRequest weekendWorkingPeople = inputView.readWeekendPeople();
-            OncallResponse response = oncallService.showOncallResult(weekDayWorkingPeople, weekendWorkingPeople);
-            outputView.showOncallResult(response);
-            inputView.readClose();
-        });
+        try {
+            runMethod(this::assignOncall);
+        } catch (NoSuchElementException e) {
+            outputView.printMessage(e.getMessage());
+        }
+    }
+
+    private void assignOncall() {
+        MonthRequest workingRequest = getValidRequest(inputView::readWorkingMonth);
+        oncallService.makeDetailOfMonth(workingRequest);
+        WorkerRequest weekDayWorkingPeople = inputView.readWeekDayPeople();
+        WorkerRequest weekendWorkingPeople = inputView.readWeekendPeople();
+        OncallResponse response = oncallService.showOncallResult(weekDayWorkingPeople, weekendWorkingPeople);
+        outputView.showOncallResult(response);
     }
 
     private <T> T getValidRequest(Supplier<T> inputSupplier) {
