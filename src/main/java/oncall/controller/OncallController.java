@@ -2,7 +2,7 @@ package oncall.controller;
 
 import oncall.dto.MonthRequest;
 import oncall.dto.OncallResponse;
-import oncall.dto.PeopleRequest;
+import oncall.dto.WorkerRequest;
 import oncall.service.OncallService;
 import oncall.view.InputView;
 import oncall.view.OutputView;
@@ -22,8 +22,8 @@ public class OncallController {
 
     public void start() {
         MonthRequest workingRequest = getValidRequest(inputView::readWorkingMonth);
-        PeopleRequest weekDayWorkingPeople = getValidRequest(inputView::readWeekDayPeople);
-        PeopleRequest weekendWorkingPeople = getValidRequest(inputView::readWeekendPeople);
+        WorkerRequest weekDayWorkingPeople = getValidRequest(inputView::readWeekDayPeople);
+        WorkerRequest weekendWorkingPeople = getValidRequest(inputView::readWeekendPeople);
         OncallResponse response = oncallService.showOncallResult(workingRequest, weekDayWorkingPeople, weekendWorkingPeople);
         outputView.showOncallResult(response);
     }

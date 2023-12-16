@@ -1,4 +1,4 @@
-package oncall.model;
+package oncall.model.vo;
 
 import oncall.model.calender.Week;
 

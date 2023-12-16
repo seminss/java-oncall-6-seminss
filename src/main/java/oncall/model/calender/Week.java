@@ -18,7 +18,6 @@ public enum Week {
     }
 
     public String getKoreanDayOfWeek() {
-        //휴일은 휴일 붙여서 내보내기
         return koreanDayOfWeek;
     }
 

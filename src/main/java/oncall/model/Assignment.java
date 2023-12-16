@@ -1,6 +1,7 @@
 package oncall.model;
 
 import oncall.model.calender.SpecialHoliday;
+import oncall.model.vo.DetailOfDay;
 
 public class Assignment {
     private final DetailOfDay detailOfDay;

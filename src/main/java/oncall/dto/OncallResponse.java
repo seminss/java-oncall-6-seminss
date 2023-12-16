@@ -1,7 +1,6 @@
 package oncall.dto;
 
 import oncall.model.Assignment;
-import oncall.model.DetailOfDay;
 
 import java.util.*;
 

@@ -2,14 +2,13 @@ package oncall.service;
 
 import oncall.dto.OncallResponse;
 import oncall.dto.MonthRequest;
-import oncall.dto.PeopleRequest;
-import oncall.model.DetailOfDay;
+import oncall.dto.WorkerRequest;
+import oncall.model.vo.DetailOfDay;
 import oncall.model.Assignment;
 import oncall.model.calender.EndOfMonth;
 import oncall.model.calender.SpecialHoliday;
 import oncall.model.calender.Week;
-import oncall.model.vo.WeekdayWorker;
-import oncall.model.vo.WeekendWorker;
+import oncall.model.vo.Worker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +16,10 @@ import java.util.List;
 public class OncallService {
 
     public OncallResponse showOncallResult(MonthRequest workingRequest
-            , PeopleRequest weekDayWorkingPeople, PeopleRequest weekendWorkingPeople) {
-        List<DetailOfDay> details = makeDetails(workingRequest.getMonth(), workingRequest.getKoreanDayOfWeek());
-        List<Assignment> assignments = assignOncall(new WeekdayWorker(weekDayWorkingPeople.getPeople()),
-                new WeekendWorker(weekendWorkingPeople.getPeople()), details);
+            , WorkerRequest weekDayWorkingPeople, WorkerRequest weekendWorkingPeople) {
+        List<DetailOfDay> detailOfDays = makeDetails(workingRequest.getMonth(), workingRequest.getKoreanDayOfWeek());
+        List<Assignment> assignments = assignOncall(
+                new Worker(weekDayWorkingPeople.getWorker(),weekendWorkingPeople.getWorker()),detailOfDays);
         return new OncallResponse(workingRequest.getMonth(), assignments);
     }
 
@@ -37,10 +36,10 @@ public class OncallService {
     }
 
     public List<Assignment> assignOncall
-            (WeekdayWorker weekdayWorker, WeekendWorker weekendWorker, List<DetailOfDay> details) {
+            (Worker worker, List<DetailOfDay> details) {
         List<Assignment> assignments = new ArrayList<>();
-        List<String> weekdayWorkerList = weekdayWorker.getWorkers();
-        List<String> weekendWorkerList = weekendWorker.getWorkers();
+        List<String> weekdayWorkerList = worker.getWeekdayWorkers();
+        List<String> weekendWorkerList = worker.getWeekendWorkers();
         int weekdayWorkerSize = weekdayWorkerList.size();
         int weekendWorkerSize = weekendWorkerList.size();
         int weekdayWorkerIndex = 0;

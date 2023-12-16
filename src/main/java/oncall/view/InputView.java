@@ -2,7 +2,7 @@ package oncall.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import oncall.dto.MonthRequest;
-import oncall.dto.PeopleRequest;
+import oncall.dto.WorkerRequest;
 
 public class InputView {
 
@@ -12,16 +12,16 @@ public class InputView {
         return MonthRequest.of(userInput);
     }
 
-    public PeopleRequest readWeekDayPeople() {
+    public WorkerRequest readWeekDayPeople() {
         System.out.print("평일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
         String userInput = read();
-        return PeopleRequest.of(userInput);
+        return WorkerRequest.of(userInput);
     }
 
-    public PeopleRequest readWeekendPeople() {
+    public WorkerRequest readWeekendPeople() {
         System.out.print("휴일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
         String userInput = read();
-        return PeopleRequest.of(userInput);
+        return WorkerRequest.of(userInput);
     }
 
 
