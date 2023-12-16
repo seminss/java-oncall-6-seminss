@@ -1,4 +1,4 @@
-package oncall.model;
+package oncall.model.calender;
 
 import oncall.exception.OncallException;
 

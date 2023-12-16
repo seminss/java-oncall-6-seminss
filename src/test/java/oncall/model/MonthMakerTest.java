@@ -2,15 +2,13 @@ package oncall.model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class WorkingMonthTest {
+class MonthMakerTest {
 
     @Test
     void test(){
-        WorkingMonth workingMonth = new WorkingMonth(5, "월");
+        MonthMaker monthMaker = new MonthMaker(5, "월");
         //details 목록을 출력
-        for (WorkingMonth.Detail detail : workingMonth.getDetails()) {
+        for (DetailOfDay detail : monthMaker.getDetails()) {
             System.out.println(detail.getDay() + " " + detail.getDayOfWeek() + " " + detail.isHoliday());
         }
     }

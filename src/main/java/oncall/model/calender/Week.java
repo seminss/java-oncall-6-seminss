@@ -1,4 +1,4 @@
-package oncall.model;
+package oncall.model.calender;
 
 import oncall.exception.OncallException;
 
@@ -29,5 +29,9 @@ public enum Week {
     public static Week next(Week dayOfWeek) {
         int nextDayOfWeekIndex = (dayOfWeek.ordinal() + 1) % 7;
         return values()[nextDayOfWeekIndex];
+    }
+
+    public boolean isWeekend(Week dayOfWeek) {
+        return dayOfWeek == SATURDAY || dayOfWeek == SUNDAY;
     }
 }
