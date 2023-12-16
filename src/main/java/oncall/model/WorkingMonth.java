@@ -23,6 +23,15 @@ public class WorkingMonth {
         return details;
     }
 
+
+    public int getMonth() {
+        return month;
+    }
+
+    public List<Detail> getDetails() {
+        return details;
+    }
+
     public class Detail {
         private final int day;
         private final Week dayOfWeek;
