@@ -21,13 +21,18 @@ public class OncallController {
     }
 
     public void start() {
-        MonthRequest workingRequest = getValidRequest(inputView::readWorkingMonth);
-        WorkerRequest weekDayWorkingPeople = getValidRequest(inputView::readWeekDayPeople);
-        WorkerRequest weekendWorkingPeople = getValidRequest(inputView::readWeekendPeople);
-        OncallResponse response = oncallService.showOncallResult(workingRequest, weekDayWorkingPeople, weekendWorkingPeople);
-        outputView.showOncallResult(response);
+        runMethod(this::showOncallAssignment);
+        inputView.readClose();
     }
 
+    private void showOncallAssignment() {
+        MonthRequest workingRequest = getValidRequest(inputView::readWorkingMonth);
+        oncallService.makeDetailOfMonth(workingRequest);
+        WorkerRequest weekDayWorkingPeople = inputView.readWeekDayPeople();
+        WorkerRequest weekendWorkingPeople = inputView.readWeekendPeople();
+        OncallResponse response = oncallService.showOncallResult(weekDayWorkingPeople, weekendWorkingPeople);
+        outputView.showOncallResult(response);
+    }
 
     private <T> T getValidRequest(Supplier<T> inputSupplier) {
         while (true) {

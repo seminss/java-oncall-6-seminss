@@ -1,5 +1,6 @@
 package oncall.model.calender;
 
+import oncall.exception.ErrorMessage;
 import oncall.exception.OncallException;
 
 public enum Week {
@@ -27,7 +28,7 @@ public enum Week {
                 return dayOfWeek;
             }
         }
-        throw new OncallException("요일을 잘못 입력하셨습니다.");
+        throw new OncallException(ErrorMessage.INVALID_VALUE.getMessage());
     }
 
     public static Week next(Week dayOfWeek) {

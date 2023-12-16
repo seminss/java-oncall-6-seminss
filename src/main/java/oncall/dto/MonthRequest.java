@@ -1,5 +1,6 @@
 package oncall.dto;
 
+import oncall.exception.ErrorMessage;
 import oncall.exception.OncallException;
 
 public class MonthRequest {
@@ -33,7 +34,7 @@ public class MonthRequest {
 
     private void validateNotEmpty(String userInput) {
         if (userInput.isEmpty()) {
-            throw new OncallException("유효하지 않은 입력 값입니다. 다시 입력해 주세요.");
+            throw new OncallException(ErrorMessage.INVALID_VALUE.getMessage());
         }
     }
 

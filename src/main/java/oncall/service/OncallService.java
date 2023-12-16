@@ -15,12 +15,18 @@ import java.util.List;
 
 public class OncallService {
 
-    public OncallResponse showOncallResult(MonthRequest workingRequest
-            , WorkerRequest weekDayWorkingPeople, WorkerRequest weekendWorkingPeople) {
-        List<DetailOfDay> detailOfDays = makeDetails(workingRequest.getMonth(), workingRequest.getKoreanDayOfWeek());
+    private int month;
+    private List<DetailOfDay> detailOfMonth;
+
+    public void makeDetailOfMonth(MonthRequest workingRequest) {
+        this.month = workingRequest.getMonth();
+        this.detailOfMonth = makeDetails(workingRequest.getMonth(), workingRequest.getKoreanDayOfWeek());
+    }
+
+    public OncallResponse showOncallResult(WorkerRequest weekDayWorkingPeople, WorkerRequest weekendWorkingPeople) {
         List<Assignment> assignments = assignOncall(
-                new Worker(weekDayWorkingPeople.getWorker(),weekendWorkingPeople.getWorker()),detailOfDays);
-        return new OncallResponse(workingRequest.getMonth(), assignments);
+                new Worker(weekDayWorkingPeople.getWorker(), weekendWorkingPeople.getWorker()), detailOfMonth);
+        return new OncallResponse(month, assignments);
     }
 
     private List<DetailOfDay> makeDetails(int month, String koreanOfDayOfWeek) {

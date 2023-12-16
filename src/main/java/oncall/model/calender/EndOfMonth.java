@@ -1,5 +1,6 @@
 package oncall.model.calender;
 
+import oncall.exception.ErrorMessage;
 import oncall.exception.OncallException;
 
 public enum EndOfMonth {
@@ -31,7 +32,7 @@ public enum EndOfMonth {
                 return endOfMonth;
             }
         }
-        throw new OncallException("해당하는 월이 없습니다.");
+        throw new OncallException(ErrorMessage.INVALID_VALUE.getMessage());
     }
 
     public int getMonth() {
