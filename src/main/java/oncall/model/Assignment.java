@@ -1,4 +1,7 @@
 package oncall.model;
+
+import oncall.model.calender.SpecialHoliday;
+
 public class Assignment {
     private final DetailOfDay detailOfDay;
     private final String worker;
@@ -14,5 +17,9 @@ public class Assignment {
 
     public String getWorker() {
         return worker;
+    }
+
+    public boolean isSpecialHoliday() {
+        return SpecialHoliday.containDay(detailOfDay.getMonth(), detailOfDay.getDay());
     }
 }

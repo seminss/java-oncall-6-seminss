@@ -29,8 +29,8 @@ public class OncallService {
         Week dayOfWeek = Week.from(koreanOfDayOfWeek);
         int endDay = EndOfMonth.of(month).getEndDay();
         for (int day = 1; day <= endDay; day++) {
-            boolean isHoliday = SpecialHoliday.isHoliday(month, day) || dayOfWeek.isWeekend(dayOfWeek);
-            details.add(new DetailOfDay(day, dayOfWeek, isHoliday));
+            boolean isHoliday = SpecialHoliday.containDay(month, day) || dayOfWeek.isWeekend(dayOfWeek);
+            details.add(new DetailOfDay(month, day, dayOfWeek, isHoliday));
             dayOfWeek = Week.next(dayOfWeek);
         }
         return details;
