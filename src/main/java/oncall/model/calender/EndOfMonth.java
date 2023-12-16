@@ -35,6 +35,15 @@ public enum EndOfMonth {
         throw new OncallException(ErrorMessage.INVALID_VALUE.getMessage());
     }
 
+    public static boolean isInDayRange(int month, int day) {
+        EndOfMonth endOfMonth = EndOfMonth.of(month);
+        return day >= 1 && day <= endOfMonth.endDay;
+    }
+
+    public static boolean isInMonthRange(int month) {
+        return month < JANUARY.month && month > DECEMBER.month;
+    }
+
     public int getMonth() {
         return month;
     }

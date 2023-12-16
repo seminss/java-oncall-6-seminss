@@ -43,10 +43,13 @@ public class OncallController {
     }
 
     private void runMethod(Runnable function) {
-        try {
-            function.run();
-        } catch (IllegalArgumentException e) {
-            outputView.printMessage(e.getMessage());
+        while (true) {
+            try {
+                function.run();
+                break;
+            } catch (IllegalArgumentException e) {
+                outputView.printMessage(e.getMessage());
+            }
         }
     }
 

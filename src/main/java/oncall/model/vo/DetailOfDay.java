@@ -1,5 +1,8 @@
 package oncall.model.vo;
 
+import oncall.exception.ErrorMessage;
+import oncall.exception.OncallException;
+import oncall.model.calender.EndOfMonth;
 import oncall.model.calender.Week;
 
 public class DetailOfDay {
@@ -10,6 +13,7 @@ public class DetailOfDay {
     private final boolean isHoliday; //휴일인가요
 
     public DetailOfDay(int month, int day, Week dayOfWeek, boolean isHoliday) {
+        validateMonthRange(month);
         this.month = month;
         this.day = day;
         this.dayOfWeek = dayOfWeek;
@@ -34,5 +38,18 @@ public class DetailOfDay {
 
     public int getMonth() {
         return month;
+    }
+
+    public void validateMonthRange(final int month) {
+        if (EndOfMonth.isInMonthRange(month)) {
+            throw new OncallException(ErrorMessage.INVALID_VALUE.getMessage());
+        }
+    }
+
+    public void validateDayRange(final int month, final int day) {
+        if (EndOfMonth.isInDayRange(month, day)) {
+            throw new OncallException(ErrorMessage.INVALID_VALUE.getMessage());
+        }
+        ;
     }
 }

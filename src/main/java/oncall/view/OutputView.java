@@ -6,8 +6,8 @@ import oncall.model.Assignment;
 import java.util.StringJoiner;
 
 public class OutputView {
-    StringBuilder sb = new StringBuilder();
-    StringJoiner sj = new StringJoiner(", ");
+
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     public void printMessage(String message) {
         System.out.println(message);
@@ -22,7 +22,7 @@ public class OutputView {
                 holidaySuffix = "(휴일)";
             }
 
-            System.out.printf("%d월 %d일 %s%s %s\n",
+            System.out.printf("%d월 %d일 %s%s %s" + LINE_SEPARATOR,
                     response.getMonth(),
                     assignment.getDetailOfDay().getDay(),
                     dayOfWeekStr,
