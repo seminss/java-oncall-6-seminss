@@ -1,17 +1,19 @@
 package oncall.model.vo;
 
-public class WeekendWorker {
-    private final String worker;
+import java.util.*;
 
-    private WeekendWorker(String worker) {
-        this.worker = worker;
+public class WeekendWorker {
+    private final List<String> workers;
+
+    private WeekendWorker(List<String> worker) {
+        this.workers = worker;
     }
 
-    public static WeekendWorker of(String worker) {
+    public static WeekendWorker of(List<String> worker) {
         return new WeekendWorker(worker);
     }
 
-    public String getWorker() {
-        return worker;
+    public List<String> getWorkers() {
+        return workers;
     }
 }

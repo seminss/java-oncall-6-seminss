@@ -3,17 +3,18 @@ package oncall.model.vo;
 import java.util.*;
 
 public class WeekdayWorker {
-    List<String> workerList = new ArrayList<>();
 
-    private WeekdayWorker(List<String> workerList) {
-        this.workerList = workerList;
+    private final List<String> workers;
+
+    public WeekdayWorker(List<String> workers) {
+        this.workers = workers;
     }
 
-    public static WeekdayWorker of(List<String> workerList) {
-        return new WeekdayWorker(workerList);
+    public static WeekdayWorker of(List<String> workers) {
+        return new WeekdayWorker(workers);
     }
 
-    public List<String> getWorkerList() {
-        return workerList;
+    public List<String> getWorkers() {
+        return workers;
     }
 }
