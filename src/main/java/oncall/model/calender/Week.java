@@ -11,15 +11,20 @@ public enum Week {
     SATURDAY("토"),
     SUNDAY("일");
 
-    private final String dayOfWeek;
+    private final String koreanDayOfWeek;
 
     Week(String dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
+        this.koreanDayOfWeek = dayOfWeek;
+    }
+
+    public String getKoreanDayOfWeek() {
+        //휴일은 휴일 붙여서 내보내기
+        return koreanDayOfWeek;
     }
 
     public static Week from(String koreanOfDayOfWeek) {
         for (Week dayOfWeek : values()) {
-            if (dayOfWeek.dayOfWeek.equals(koreanOfDayOfWeek)) {
+            if (dayOfWeek.koreanDayOfWeek.equals(koreanOfDayOfWeek)) {
                 return dayOfWeek;
             }
         }

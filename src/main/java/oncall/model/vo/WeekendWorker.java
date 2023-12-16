@@ -5,7 +5,7 @@ import java.util.*;
 public class WeekendWorker {
     private final List<String> workers;
 
-    private WeekendWorker(List<String> worker) {
+    public WeekendWorker(List<String> worker) {
         this.workers = worker;
     }
 

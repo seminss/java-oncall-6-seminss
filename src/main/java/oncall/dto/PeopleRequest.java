@@ -9,11 +9,16 @@ public class PeopleRequest {
     private final List<String> people;
 
     private PeopleRequest(String userInput) {
+        validateNotEmpty(userInput);
         this.people = parsePeople(userInput);
     }
 
     public static PeopleRequest of(String userInput) {
         return new PeopleRequest(userInput);
+    }
+
+    public List<String> getPeople() {
+        return people;
     }
 
     private void validateNotEmpty(String userInput) {

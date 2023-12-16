@@ -19,6 +19,14 @@ public class MonthRequest {
         return new MonthRequest(userInput);
     }
 
+    public int getMonth() {
+        return month;
+    }
+
+    public String getKoreanDayOfWeek() {
+        return koreanDayOfWeek;
+    }
+
     private void validateFormat(String userInput) {
         //1,금 형태로 숫자,한글 형태인지 검증한다.
     }

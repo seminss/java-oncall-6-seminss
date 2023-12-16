@@ -20,7 +20,8 @@ public class DetailOfDay {
         return day;
     }
 
-    public Week getDayOfWeek() {
+    public
+    Week getDayOfWeek() {
         return dayOfWeek;
     }
 
