@@ -21,34 +21,19 @@ public class OncallController {
     }
 
     public void start() {
-        runMethod(this::showOncallAssignment);
-        inputView.readClose();
-    }
-
-    private void showOncallAssignment() {
         MonthRequest workingRequest = getValidRequest(inputView::readWorkingMonth);
         oncallService.makeDetailOfMonth(workingRequest);
         WorkerRequest weekDayWorkingPeople = inputView.readWeekDayPeople();
         WorkerRequest weekendWorkingPeople = inputView.readWeekendPeople();
         OncallResponse response = oncallService.showOncallResult(weekDayWorkingPeople, weekendWorkingPeople);
         outputView.showOncallResult(response);
+        inputView.readClose();
     }
 
     private <T> T getValidRequest(Supplier<T> inputSupplier) {
         while (true) {
             try {
                 return inputSupplier.get();
-            } catch (IllegalArgumentException e) {
-                outputView.printMessage(e.getMessage());
-            }
-        }
-    }
-
-    private void runMethod(Runnable function) {
-        while (true) {
-            try {
-                function.run();
-                break;
             } catch (IllegalArgumentException e) {
                 outputView.printMessage(e.getMessage());
             }
