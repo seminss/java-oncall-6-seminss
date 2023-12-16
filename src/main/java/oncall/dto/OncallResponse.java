@@ -20,4 +20,5 @@ public class OncallResponse {
     public List<Assignment> getAssignments() {
         return assignments;
     }
+
 }

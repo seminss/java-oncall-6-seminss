@@ -21,13 +21,15 @@ public class OncallController {
     }
 
     public void start() {
-        MonthRequest workingRequest = getValidRequest(inputView::readWorkingMonth);
-        oncallService.makeDetailOfMonth(workingRequest);
-        WorkerRequest weekDayWorkingPeople = inputView.readWeekDayPeople();
-        WorkerRequest weekendWorkingPeople = inputView.readWeekendPeople();
-        OncallResponse response = oncallService.showOncallResult(weekDayWorkingPeople, weekendWorkingPeople);
-        outputView.showOncallResult(response);
-        inputView.readClose();
+        runMethod(() -> {
+            MonthRequest workingRequest = getValidRequest(inputView::readWorkingMonth);
+            oncallService.makeDetailOfMonth(workingRequest);
+            WorkerRequest weekDayWorkingPeople = inputView.readWeekDayPeople();
+            WorkerRequest weekendWorkingPeople = inputView.readWeekendPeople();
+            OncallResponse response = oncallService.showOncallResult(weekDayWorkingPeople, weekendWorkingPeople);
+            outputView.showOncallResult(response);
+            inputView.readClose();
+        });
     }
 
     private <T> T getValidRequest(Supplier<T> inputSupplier) {
@@ -39,4 +41,13 @@ public class OncallController {
             }
         }
     }
+
+    private void runMethod(Runnable function) {
+        try {
+            function.run();
+        } catch (IllegalArgumentException e) {
+            outputView.printMessage(e.getMessage());
+        }
+    }
+
 }

@@ -26,7 +26,28 @@ public class OncallService {
     public OncallResponse showOncallResult(WorkerRequest weekDayWorkingPeople, WorkerRequest weekendWorkingPeople) {
         List<Assignment> assignments = assignOncall(
                 new Worker(weekDayWorkingPeople.getWorker(), weekendWorkingPeople.getWorker()), detailOfMonth);
-        return new OncallResponse(month, assignments);
+        return new OncallResponse(month, modifyContinuous(assignments));
+    }
+
+    private List<Assignment> modifyContinuous(List<Assignment> assignments) {
+        for (int i = 0; i < assignments.size() - 1; i++) {
+            String currentWorker = assignments.get(i).getWorker();
+            String nextWorker = assignments.get(i + 1).getWorker();
+
+            if (currentWorker.equals(nextWorker)) {
+                swapWorkers(assignments, i + 1);
+            }
+        }
+        return assignments;
+    }
+
+    private void swapWorkers(List<Assignment> assignments, int indexToSwap) {
+        if (indexToSwap < assignments.size() - 1) {
+            Assignment currentAssignment = assignments.get(indexToSwap);
+            Assignment nextAssignment = assignments.get(indexToSwap + 1);
+            assignments.set(indexToSwap, new Assignment(currentAssignment.getDetailOfDay(), nextAssignment.getWorker()));
+            assignments.set(indexToSwap + 1, new Assignment(nextAssignment.getDetailOfDay(), currentAssignment.getWorker()));
+        }
     }
 
     private List<DetailOfDay> makeDetails(int month, String koreanOfDayOfWeek) {
