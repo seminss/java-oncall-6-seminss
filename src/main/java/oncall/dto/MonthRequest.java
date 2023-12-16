@@ -33,7 +33,7 @@ public class MonthRequest {
 
     private void validateNotEmpty(String userInput) {
         if (userInput.isEmpty()) {
-            throw new OncallException("입력값이 없습니다.");
+            throw new OncallException("유효하지 않은 입력 값입니다. 다시 입력해 주세요.");
         }
     }
 
