@@ -7,7 +7,6 @@ import oncall.service.OncallService;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
-import java.util.NoSuchElementException;
 import java.util.function.Supplier;
 
 public class OncallController {
@@ -22,16 +21,16 @@ public class OncallController {
     }
 
     public void start() {
-        try {
-            runMethod(this::assignOncall);
-        } catch (NoSuchElementException e) {
-            outputView.printMessage(e.getMessage());
-        }
+        runMethod(this::assignDate);
+        runMethod(this::assignWorkers);
     }
 
-    private void assignOncall() {
+    private void assignDate() {
         MonthRequest workingRequest = getValidRequest(inputView::readWorkingMonth);
         oncallService.makeDetailOfMonth(workingRequest);
+    }
+
+    private void assignWorkers() {
         WorkerRequest weekDayWorkingPeople = inputView.readWeekDayPeople();
         WorkerRequest weekendWorkingPeople = inputView.readWeekendPeople();
         OncallResponse response = oncallService.showOncallResult(weekDayWorkingPeople, weekendWorkingPeople);

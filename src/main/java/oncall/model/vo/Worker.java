@@ -32,13 +32,17 @@ public class Worker {
     private void validateNicknameLength(List<String> workers) {
         for (String worker : workers) {
             if (worker.length() > 5) {
+                System.out.println("worker.length() = " + worker.length());
                 throw new OncallException(ErrorMessage.INVALID_VALUE.getMessage());
             }
         }
     }
 
     private void validateNumberOfWorker(List<String> weekdayWorkers, List<String> weekendWorkers) {
-        if (weekdayWorkers.size() + weekendWorkers.size() < 5 || weekdayWorkers.size() + weekendWorkers.size() > 35) {
+        Set<String> totalWorkers = new HashSet<>();
+        totalWorkers.addAll(weekdayWorkers);
+        totalWorkers.addAll(weekendWorkers);
+        if (totalWorkers.size() < 5 || totalWorkers.size() > 35) {
             throw new OncallException(ErrorMessage.INVALID_VALUE.getMessage());
         }
     }
